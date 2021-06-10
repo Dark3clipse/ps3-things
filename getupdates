@@ -1,0 +1,10 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+
+ARR=$(curl -k https://a0.ww.np.dl.playstation.net/tpl/np/$1/$1-ver.xml | xmllint --format - | grep -Eo 'http.*\.pkg')
+mkdir -p $1
+cd $1
+for URL in $ARR
+do
+    wget $URL
+done
